@@ -12,13 +12,13 @@ class Comments extends Component {
   componentDidMount() {
     this.setCommentsFromLocalStorage();
   }
-
+  //Done
   setCommentsFromLocalStorage = (postId = this.props.postId) => {
     const fetchedComments = api.fetchAllComments();
     const comments = api.filterComments(fetchedComments, postId);
     this.setState({ comments });
   };
-
+  //Done
   removeComment = commentId => {
     api.removeComment(commentId);
     this.setCommentsFromLocalStorage();

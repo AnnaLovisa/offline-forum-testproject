@@ -45,7 +45,7 @@ describe('<Posts />', () => {
     expect(component.state().posts).toBe(fakePosts.data)
   })
 
-  it('should return all posts from localstorage', () => {
+  it('should return all posts that are stored in localStorage', () => {
     localStorage.setItem('posts', JSON.stringify(fakePost));
     expect(api.fetchAllPosts()).toEqual(fakePost);
   })

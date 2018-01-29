@@ -22,10 +22,6 @@ describe('<Button />', () => {
         expect(component.state().currentPage).toEqual("bot");
   })
 
-  it('should create a new post on button click', () => {
-    
-  })
-
   it('The button should toggle between the Talk to a real human button and Return to Forum button', () => {
       
   })

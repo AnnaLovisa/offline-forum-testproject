@@ -11,19 +11,30 @@ import Posts from '../components/Posts';
 
 
 describe('<App />', () => {
+
   it('renders 1 <App /> component', () => {
     const component = shallow(<App name="app" />)
     //Checking for the length of objects in the App-component, or what length??????
     expect(component).toHaveLength(1);
   });
+
   it('renders props correctly', () => {
     const component = shallow(<App name="app" />)
     expect(component.instance().props.name).toBe('app');
   });
+
   it('renders <App /> with state', () => {
-    const component = shallow(<App currentPersona='anna'/>)
+    const component = shallow(<App currentPersona='anna' />)
     expect(component.instance().props.currentPersona).toBe('anna');
-  })
+  });
+
+  it('should fetch current persona', () => {
+    
+  });
+
+  it('change persona', () => {
+    
+  });
 })
 
 

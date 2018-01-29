@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, mount, shallow } from 'enzyme';
-import Comment from '../components/Comments';
+import Comments from '../components/Comments';
 import * as api from '../api/index';
 
 beforeEach(() => {
@@ -9,22 +9,36 @@ beforeEach(() => {
 
 describe('<Comments />', () => {
 
-  it('renders 1 <Comments /> component', () => {
-/*     const component = shallow(<Comment name="comments" currentPersona="anna"/>)
-    //Checking for the length of objects in the Posts-component, or what length??????
-    expect(component).toHaveLength(1); */
+  const fakeComment = [{
+    postId: "45sfdf56",
+    author: "Morgana",
+    id: "18"
+  }]
+
+  beforeEach(() => {
+    localStorage.clear();
+    jest.resetModules();
   });
 
-  it('renders props correctly', () => {
-/*     const component = shallow(<Comment name="comments" currentPersona="anna" />)
-    expect(component.instance().props.name).toBe('comments');
-    expect(component.instance().props.currentPersona).toBe('anna'); */
-  });
+  it('should set the stored comments in state', () => {
+    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" />)
+    component.setState({ comments: fakeComment })
+    expect(component.state().comments).toBe(fakeComment)
+  })
 
+  it('should return all comments that are stored in localStorage', () => {
+    localStorage.setItem('comments', JSON.stringify(fakeComment));
+    expect(api.fetchAllComments()).toEqual(fakeComment);
+  })
 
-  it('renders comments correctly', () => {
-
-  });
+  it('should remove comment', () => {
+    localStorage.setItem('comments', JSON.stringify(fakeComment));
+    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" />)
+    component.instance().setCommentsFromLocalStorage();
+    expect(component.state().comments).not.toEqual([]);
+    component.instance().removeComment("18");
+    expect(component.state().comments).toEqual([]);
+  })
 
 })
 
