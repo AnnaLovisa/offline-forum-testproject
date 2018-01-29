@@ -1,3 +1,4 @@
+/*  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../api';
@@ -20,9 +21,9 @@ class CreateNewPost extends Component {
   };
 
   render() {
-    const {title, content } = this.state;
+    const { title, content } = this.state;
     return (
-      <form onSubmit={this.onSubmit} className='container mx-auto flex flex-col p-6'>
+      <form onSubmit={this.onSubmit} className='container mx-auto flex flex-col p-6' data-test='form'>
         <label htmlFor='title' className='mb-2'>Title</label>
         <input type='text' value={title} onChange={this.onChange} name='title' id='title' className='shadow rounded border mb-2 p-2' />
         <label htmlFor='content' className='mb-2'>Content </label>

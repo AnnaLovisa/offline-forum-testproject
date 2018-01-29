@@ -4,7 +4,7 @@
  * @returns { string } A unique ID
  */
 export function generateID(){
-  return `_${Math.random()
+  return `${Math.random()
     .toString(36)
     .substr(2, 9)}`;
 }
@@ -52,7 +52,7 @@ export function removePost(postId) {
 /**
  * @returns {array} array of comments from database
  */
-export function fetchAllCommments() {
+export function fetchAllComments() {
   const comments = localStorage.getItem('comments');
   return comments ? JSON.parse(comments) : [];
 }
