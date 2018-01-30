@@ -11,19 +11,19 @@ describe('<Comments />', () => {
 
   const fakeComment = [
     {
-    postId: "45sfdf56",
-    author: "Morgana",
-    id: "18",
-    comment: "",
-    currentPersona: "",
-    date: "2018-09-20"
-    },
-    {
       postId: "45sfdf56",
       author: "Morgana",
       id: "18",
-      comment: "",
-      currentPersona: "",
+      comment: "Comment 1",
+      currentPersona: "anna",
+      date: "2018-09-20"
+    },
+    {
+      postId: "56tytd234",
+      author: "Zac",
+      id: "19",
+      comment: "Comment 2",
+      currentPersona: "anna",
       date: "2018-09-20"
       }
 
@@ -35,7 +35,7 @@ describe('<Comments />', () => {
   });
 
   it('should set the stored comments in state', () => {
-    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" />)
+    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
     component.setState({ comments: fakeComment })
     expect(component.state().comments).toBe(fakeComment)
   })
@@ -47,7 +47,7 @@ describe('<Comments />', () => {
 
   it('should remove comment', () => {
     localStorage.setItem('comments', JSON.stringify(fakeComment));
-    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" />)
+    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
     component.instance().setCommentsFromLocalStorage();
     expect(component.state().comments).not.toEqual([]);
     component.instance().removeComment("18");
