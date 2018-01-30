@@ -2,6 +2,7 @@ import React from 'react';
 import { render, mount, shallow } from 'enzyme';
 import fakePosts from '../fakePosts';
 import * as api from '../api/index';
+import App from '../components/App';
 import Posts from '../components/Posts';
 import Comments from '../components/Comments';
 
@@ -75,7 +76,7 @@ describe('<Comments />', () => {
 
 })
 
-describe('<CurrentPersona />', () => {
+describe('<App />', () => {
 
   beforeEach(() => {
     /*  jest.resetModules(); */
@@ -87,7 +88,9 @@ describe('<CurrentPersona />', () => {
 
   it('should fetch current persona', () => {
     const persona = api.fetchCurrentPersona();
-    expect(component.instance().props.currentPersona).toBe(persona);
+    const component = mount(<App />);
+    const currentPersona = component.state().currentPersona;
+    expect(currentPersona).toBe(persona);
   })
 
   it('should fetch all personas', () => {

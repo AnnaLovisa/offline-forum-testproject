@@ -9,11 +9,25 @@ beforeEach(() => {
 
 describe('<Comments />', () => {
 
-  const fakeComment = [{
+  const fakeComment = [
+    {
     postId: "45sfdf56",
     author: "Morgana",
-    id: "18"
-  }]
+    id: "18",
+    comment: "",
+    currentPersona: "",
+    date: "2018-09-20"
+    },
+    {
+      postId: "45sfdf56",
+      author: "Morgana",
+      id: "18",
+      comment: "",
+      currentPersona: "",
+      date: "2018-09-20"
+      }
+
+]
 
   beforeEach(() => {
     localStorage.clear();
