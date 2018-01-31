@@ -9,20 +9,16 @@ import * as api from '../api/index';
 
 describe('<Message />', () => {
 
-  it('message should be displayed when clicking on the Skicka-button', () => {
-
+  it('should have a className of white text-grey-darker if bot is true', () => {
+    const className = "bg-white text-grey-darker";
+    const component = mount(<Message bot={true} message="this is a message" />);
+    expect(component.find('p').hasClass(className)).toEqual(true);
   })
 
-  it('should render out all the typed messages', () => {
-    
-  })
-
-})
-
-describe('<Bot />', () => {
-
-  it('an answer should appear after the message has been sent', () => {
-
+  it('should have a className of indigo-dark text-white if bot is false', () => {
+    const className = "bg-indigo-dark text-white";
+    const component = mount(<Message bot={false} message="this is a message" />);
+    expect(component.find('p').hasClass(className)).toEqual(true);
   })
 
 })
