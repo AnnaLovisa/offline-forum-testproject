@@ -8,12 +8,14 @@ import * as api from '../api/index';
 
 describe('<MessageForm />', () => {
   
-    it('What is typed in the inputfield should appear as a message in the chatfield', () => {
-      
-
+    it('should call the submit-button to send the message', () => {
+      const fakeFunction = jest.fn();
+      const component = mount(<MessageForm onSubmit={fakeFunction} />);
+      component.simulate('submit', { preventDefault (){} });
+      expect(fakeFunction).toHaveBeenCalled();
     })
-    
-    it('The message should be submitted', () => {
+
+    it('The message should be sent to state on change', () => {
       const component = mount(<MessageForm onSubmit={jest.fn()} />);
       const newMessage = {target: {name: "userMessage", value: "this is a new message from anna"}};
       component.find('input[name="userMessage"]').simulate('change', newMessage);
