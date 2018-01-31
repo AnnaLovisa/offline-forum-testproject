@@ -22,8 +22,12 @@ describe('<Button />', () => {
         expect(component.state().currentPage).toEqual("bot");
   })
 
-  it('The button should toggle between the Talk to a real human button and Return to Forum button', () => {
-      
+  it('should update the page on button click to the home-page', () => {
+    const component = mount(<App />);
+    const button = component.find('button');
+    button.simulate('click');
+    button.simulate('click');
+    expect(component.state().currentPage).toEqual("home");
   })
 
 
