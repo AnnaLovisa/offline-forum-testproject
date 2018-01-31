@@ -51,22 +51,21 @@ describe('<Posts />', () => {
     expect(component.find("[data-test='form']").hasClass(className)).toBeTruthy()
   });
 
- /*  it('sets the stored posts from localStorage to state', () => {
+  it('sets the stored posts from localStorage to state', () => {
     const component = mount(<Posts currentPersona="anna" />)
     component.setState({ posts: fakePost })
-    console.log(component.state().posts);
     const post = localStorage.setItem('posts', JSON.stringify(fakePost));
-    console.log(post);
     expect(api.fetchAllPosts()).toEqual(component.state().posts);
-  }) */
+  })
 
-/*   it('should remove post', () => {
+  it('should call the removePost-function', () => {
+    const component = mount(<Posts currentPersona="anna" author="anna" />)
     localStorage.setItem('posts', JSON.stringify(fakePost));
-    const component = mount(<Posts currentPersona="anna" />)
-    expect(component.state().posts).not.toEqual([]);
+    component.instance().setPostFromLocalStorage();
+    expect(component.state().posts).toHaveLength(2);
     component.instance().removePost("8");
-    expect(component.state().posts).toEqual([]);
-  }) */
+    expect(component.state().posts).toHaveLength(1);
+  })
 
 })
 

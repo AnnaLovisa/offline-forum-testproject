@@ -155,11 +155,3 @@ describe('Personas', () => {
   })
 
 })
-
-/* describe('<Bot />', () => {
-
-  it('should generate a reply', () => {
-
-  })
-
-}) */
