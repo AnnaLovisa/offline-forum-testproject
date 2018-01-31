@@ -12,12 +12,12 @@ class Posts extends Component {
   componentDidMount() {
     this.setPostFromLocalStorage();
   }
-  //Done
+  
   setPostFromLocalStorage = () => {
     const posts = api.fetchAllPosts();
     this.setState({ posts });
   };
-  //Done
+  
   removePost = (postId) => {
     api.removePost(postId);
     this.setPostFromLocalStorage();
