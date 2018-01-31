@@ -16,10 +16,10 @@ describe('<Button />', () => {
   })
 
   it('should update the page on button click to the bot-page', () => {
-        const component = mount(<App />);
-        const button = component.find('button');
-        button.simulate('click');
-        expect(component.state().currentPage).toEqual("bot");
+    const component = mount(<App />);
+    const button = component.find('button');
+    button.simulate('click');
+    expect(component.state().currentPage).toEqual("bot");
   })
 
   it('should update the page on button click to the home-page', () => {
