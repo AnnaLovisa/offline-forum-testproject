@@ -21,10 +21,8 @@ class App extends Component {
   };
 
   changePersona = ({ target }) => {
-    console.log(target);
     this.setState({ currentPersona: target.value });
     api.storeCurrentPersona(target.value);
-    console.log(this.state.currentPersona);
   };
 
   changePage = () => {

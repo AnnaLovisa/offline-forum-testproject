@@ -6,17 +6,6 @@ import Bot from '../components/Bot/Bot';
 import TypingIndicator from '../components/Bot/TypingIndicator'; 
 import * as api from '../api/index';
 
-describe('<MessageForm />', () => {
-
-  it('What is typed in the inputfield should appear as a message in the chatfield', () => {
-
-  })
-
-  it('A loader should appear during the loadingtime', () => {
-
-  })
-
-})
 
 describe('<Message />', () => {
 
