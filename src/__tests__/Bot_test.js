@@ -7,30 +7,61 @@ import TypingIndicator from '../components/Bot/TypingIndicator';
 import * as api from '../api/index';
 
 describe('<Bot />', () => {
+
+  jest.useFakeTimers();
+
+  function flushPromises() {
+    return new Promise(resolve => setImmediate(resolve));
+  }
   
-    it('sendReply function should be called onsubmit', () => {
-      const fakeSendReply = jest.fn();
-      const component = mount(<MessageForm onSubmit={fakeSendReply} />)
-      component.find('input[type="submit"]').simulate('submit');
-      expect(fakeSendReply).toHaveBeenCalled();
-    })
+  it('sendReply function should be called onsubmit', () => {
+    const fakeSendReply = jest.fn();
+    const component = mount(<MessageForm onSubmit={fakeSendReply} />)
+    component.find('input[type="submit"]').simulate('submit');
+    expect(fakeSendReply).toHaveBeenCalled();
+  })
 
-    it('typing should change state to true when sendReply is called', () => {
-      const wrapper = shallow(<Bot />)
-      expect(wrapper.state().typing).toBe(false);
-      wrapper.instance().sendReply();
-      expect(wrapper.state().typing).toBe(true);
-    })
+  it('a replymessage should be sent when message is submitted', () => {
+    const component = mount(<Bot />)
+    component.find(MessageForm).find('input[type="text"]').simulate('change', { target: { name: "userMessage", value: "this is a message"}})
+    component.find(MessageForm).find('form').simulate('submit');
 
-    /* it('messages should change state when sendReply is called', () => {
+    jest.runAllTimers();
 
-      const msg = "hejhej";
+    component.instance().sendReply();
+    return flushPromises().then(() => {
+      expect(component.state().messages[1].bot).toBeTruthy();
+    });
+  })
 
-      const component = mount(<Bot />)
-      component.simulate('submit', {messages: msg})
-      const messaages = [...component.state().messages, msg]
-      component.setState({messages: messaages});
-      expect(component.state().messages).toEqual("hejhej");
-    }) */
-  
+  it('should render a message', () => {
+    const component = mount(<Bot />)
+    component.instance().onSubmit("This is a message");
+    console.log(component.find('.h-64').children())
+    expect(component.find('.h-64').html()).toContain("This is a message")
+  })
+
+  it('typing should change state to true when sendReply is called', () => {
+    const wrapper = shallow(<Bot />)
+    expect(wrapper.state().typing).toBe(false);
+    wrapper.instance().sendReply();
+    expect(wrapper.state().typing).toBe(true);
+  })
+
+
+  it('messageinput should change state on submit', () => {
+    const message = "This is a message"
+    const component = mount(<Bot />);
+    component.instance().onSubmit(message);
+    expect(component.state().messages[0]).toEqual({message: message, bot: false})
+  })
+
+  it('Second messageinput should not replace the first messageinput when set in state on submit', () => {
+    const firstMessage = "This is a first message"
+    const secondMessage = "This is second message"
+    const component = mount(<Bot />);
+    component.instance().onSubmit(secondMessage);
+    expect(component.state().messages[0]).not.toEqual({message: firstMessage, bot: false})
+  })
+
   })
