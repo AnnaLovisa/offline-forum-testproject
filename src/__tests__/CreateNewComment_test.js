@@ -5,25 +5,28 @@ import CreateNewComment from '../components/CreateNewComment';
 import * as api from '../api/index';
 
 describe('<CreateNewComment />', () => {
-  
-  it('should create a new comment on submit', () => {
-      
+
+
+
+  it('the submitbutton should be called', () => {
+    const fakeFunction = jest.fn();
+    const component = mount(<CreateNewComment postId="45sfdf56" author="anna" updateComments={fakeFunction} />);
+    expect(fakeFunction).not.toHaveBeenCalled();
+    component.simulate('submit', {preventDefault () {}});
+    expect(fakeFunction).toHaveBeenCalled();
   })
   
-/*   it('should render out the values that are typed in the inputfields when creating a new post', () => {
-  
+  it('should set the inputvalues in state onchange', () => {
+    const fakeFunction = jest.fn();
+    const textComment = "annas comment";
+    const component = mount(<CreateNewComment postId="45sfdf56" author="anna" updateComments={fakeFunction} />);
+
+    const comment = {target: {name: "comment", value: textComment}}
+    component.find('textarea[name="comment"]').simulate('change', comment);
+    expect(component.state().comment).toEqual("annas comment");
+
   })
+
   
-  it('should not be created if nothing is typed in the inputfield', () => {
-  
-  })
-  
-  it('should display the name of the author underneath the written post', () => {
-      
-  })
-  
-  it('should display the date when published underneath the written comment', () => {
-  
-  }) */
-  
+
 });

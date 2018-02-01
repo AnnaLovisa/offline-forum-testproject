@@ -6,39 +6,40 @@ import * as api from '../api/index';
 
 beforeEach(() => {
   jest.resetModules();
+  localStorage.clear();
 });
 
 describe('<CreateNewPost />', () => {
 
-  const fakePost = [{
+  const fakePost = {
     title: "annas post",
     content: "annas content",
     id: jest.fn(),
     author: "anna",
     date: jest.fn()
-  }]
+  }
 
-  it('should create a new post on submit and store it in localStorage', () => {
-    /* const component = shallow(<CreateNewPost author="anna" updatePosts={jest.fn()} />); */
-    /* component.setState({title: fakePost.title, content: fakePost.content}); */
-    /* const newPost = api.createPostObject(fakePost.title, fakePost.content, fakePost.author);
-    const storePost = api.storePostObject(newPost); */
+  it('the submitbutton should be called', () => {
+    const fakeFunction = jest.fn();
+    const component = mount(<CreateNewPost author="anna" updatePosts={fakeFunction} />);
+    expect(fakeFunction).not.toHaveBeenCalled();
+    component.simulate('submit', {preventDefault () {}});
+    expect(fakeFunction).toHaveBeenCalled();
   })
 
-  it('should put the inputvalues in state on submit', () => {
-    /* const component = mount(<CreateNewPost author="anna" updatePosts={jest.fn()} onSubmit={() => {}} />);
-    component.setState({title: fakePost.title, content: fakePost.content}); */
-    //kolla längden på posterna i localStorage först
-    //simulera on submit
-    //kolla längden igen om en till post lagts till med värden från statet
+
+  it('should set the inputvalues in state onchange', () => {
+    const component = mount(<CreateNewPost author="anna" updatePosts={jest.fn()} onChange={jest.fn()} />);
+
+    const title = {target: {name: "title", value: fakePost.title}}
+    component.find('input[name="title"]').simulate('change', title);
+    expect(component.state().title).toBe("annas post");
+
+    const content = {target: {name: "content", value: fakePost.content}}
+    component.find('textarea[name="content"]').simulate('change', content);
+    expect(component.state().content).toEqual("annas content");
+
   })
 
-/*   it('should render out the values that are typed in the inputfields when creating a new post', () => {
-    
-  })
-    
-  it('should not be created if nothing is typed in the inputfields', () => {
-    
-  }) */
 
 })

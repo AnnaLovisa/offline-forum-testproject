@@ -16,10 +16,21 @@ describe('<Bot />', () => {
     })
 
     it('typing should change state to true when sendReply is called', () => {
-      const wrapper = mount(<Bot />)
+      const wrapper = shallow(<Bot />)
       expect(wrapper.state().typing).toBe(false);
       wrapper.instance().sendReply();
       expect(wrapper.state().typing).toBe(true);
     })
+
+    /* it('messages should change state when sendReply is called', () => {
+
+      const msg = "hejhej";
+
+      const component = mount(<Bot />)
+      component.simulate('submit', {messages: msg})
+      const messaages = [...component.state().messages, msg]
+      component.setState({messages: messaages});
+      expect(component.state().messages).toEqual("hejhej");
+    }) */
   
   })
