@@ -26,6 +26,16 @@ describe('<Posts />', () => {
     }
   ];
 
+  /* const testPost = [
+    {
+      id: "10",
+      title: "Titel by frej",
+      content: "Content by frej",
+      author: "frej",
+      date: "2018-01-29"
+    }
+  ] */
+
   beforeEach(() => {
     localStorage.clear();
   });
@@ -35,38 +45,45 @@ describe('<Posts />', () => {
   });
 
   it('renders 1 <Posts /> component', () => {
-    const component = shallow(<Posts name="posts" currentPersona="anna"/>)
-    expect(component).toHaveLength(1);
+    const wrapper = shallow(<Posts name="posts" currentPersona="anna"/>)
+    expect(wrapper).toHaveLength(1);
   });
 
   it('renders props correctly', () => {
-    const component = shallow(<Posts name="posts" currentPersona="anna" />)
-    expect(component.instance().props.name).toBe('posts');
-    expect(component.instance().props.currentPersona).toBe('anna');
+    const wrapper = shallow(<Posts name="posts" currentPersona="anna" />)
+    expect(wrapper.instance().props.name).toBe('posts');
+    expect(wrapper.instance().props.currentPersona).toBe('anna');
   });
 
   it('includes 1 formelement with className of container mx-auto flex flex-col p-6', () => {
     const className = 'container mx-auto flex flex-col p-6';
-    const component = mount(<Posts name="posts" currentPersona="anna" />)
-    expect(component.find("[data-test='form']").hasClass(className)).toBeTruthy()
+    const wrapper = mount(<Posts name="posts" currentPersona="anna" />)
+    expect(wrapper.find("[data-test='form']").hasClass(className)).toBeTruthy()
   });
 
   it('sets the stored posts from localStorage to state', () => {
-    const component = mount(<Posts currentPersona="anna" />)
-    component.setState({ posts: fakePost })
+    const wrapper = mount(<Posts currentPersona="anna" />)
+    wrapper.setState({ posts: fakePost })
     const post = localStorage.setItem('posts', JSON.stringify(fakePost));
-    expect(api.fetchAllPosts()).toEqual(component.state().posts);
+    expect(api.fetchAllPosts()).toEqual(wrapper.state().posts);
   })
 
-  it('should call the removePost-function', () => {
-    const component = mount(<Posts currentPersona="anna" author="anna" />)
+  it('should remove posts with the same postid as in statement', () => {
+    const wrapper = mount(<Posts currentPersona="anna" author="anna" />)
     localStorage.setItem('posts', JSON.stringify(fakePost));
-    component.instance().setPostFromLocalStorage();
-    expect(component.state().posts).toHaveLength(2);
-    component.instance().removePost("8");
-    expect(component.state().posts).toHaveLength(1);
+    wrapper.instance().setPostFromLocalStorage();
+    expect(wrapper.state().posts).toHaveLength(2);
+    wrapper.instance().removePost("8");
+    expect(wrapper.state().posts).toHaveLength(1);
   })
 
+  /* it('should render a certain post', () => {
+    const wrapper = mount(<Posts postId='565ddy34' currentPersona="Esmeralda" author="Esmeralda" />)
+    wrapper.setState({posts: testPost});
+    wrapper.instance().renderPostList(testPost);
+    expect(wrapper.find('SinglePost').html()).toContain("Titel by frej");
+  })
+ */
 })
 
 

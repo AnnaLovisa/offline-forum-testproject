@@ -27,6 +27,19 @@ describe('<App />', () => {
     expect(component.instance().props.currentPersona).toBe('anna');
   });
 
+  it('should call the method changePersona', () => {
+    let anObj = { name: "anna" };
+    const wrapper = mount(<App currentPersona= "eric" />)
+    wrapper.instance().changePersona({ target: { value: anObj.name }});
+    expect(wrapper.state().currentPersona).toBe("anna");
+   })
+
+   it('should call the method changePage', () => {
+    const wrapper = mount(<App currentPage="home" />)
+    wrapper.instance().changePage();
+    expect(wrapper.state().currentPage).toBe("bot");
+   })
+
 })
 
 

@@ -47,7 +47,22 @@ describe('<Posts />', () => {
     const newPost = api.createPostObject(title, content, author);
     expect(newPost).toMatchObject({title, content, author});
   })
- 
+
+  it('should not create post object with undefined values', () => {
+
+    const fakePost = [{
+      id: "123",
+      title: undefined,
+      content: undefined,
+      author: "lovisa",
+      date: "2018-01-29"
+    }]
+
+    const newPost = api.createPostObject(fakePost.title, fakePost.content, fakePost.author);
+    expect(newPost.title).toEqual("");
+    expect(newPost.content).toEqual("");
+  })
+
 
   it('should fetch all posts that are stored in localStorage', () => {
     localStorage.setItem('posts', JSON.stringify(fakePosts));
@@ -77,7 +92,6 @@ describe('<Comments />', () => {
       postId: "565ddy34",
       id: "16",
       author: "lovisa",
-      onClick: jest.fn(),
       currentPersona: "lovisa",
       comment: "A comment by lovisa",
       date: "2018-01-29"
@@ -86,9 +100,19 @@ describe('<Comments />', () => {
       postId: "56tytd234",
       id: "17",
       author: "anna",
-      onClick: jest.fn(),
       currentPersona: "lovisa",
       comment: "A comment by anna",
+      date: "2018-01-29"
+    }
+  ]
+
+  const testComment = [
+    {
+      postId: "565ddy34",
+      id: "16",
+      author: "lovisa",
+      currentPersona: "lovisa",
+      comment: "A comment by lovisa",
       date: "2018-01-29"
     }
   ]
@@ -100,7 +124,7 @@ describe('<Comments />', () => {
        }
    });
 
-   it('should create a comment object', () => {
+  it('should create a comment object', () => {
 
     const comment = "Comment about Winter"
     const postId = "565ddy34"
@@ -111,20 +135,35 @@ describe('<Comments />', () => {
     expect(newComment.comment).toEqual(comment);
     expect(newComment.postId).toEqual(postId);
     expect(newComment.author).toEqual(author);
-   })
+  })
+
+  it('should not create a comment object with undefined values', () => {
+    
+        const comment = undefined
+        const postId = "565ddy34"
+        const author = "Olle"
+    
+        const newComment = api.createCommentObject(comment, postId, author);
+    
+        expect(newComment.comment).toEqual("");
+        expect(newComment.postId).toEqual(postId);
+        expect(newComment.author).toEqual(author);
+  })
 
   it('should fetch all comments from localStorage', () => {
     const allComments = api.fetchAllComments();
     expect(allComments).toHaveLength(2);
   })
 
-})
-
-/*it('should remove comment from localStorage', () => {
-   
+  it('should store comment object in localStorage', () => {
+    api.storeCommentObject(testComment);
+    const storedComment = JSON.parse(localStorage.getItem('comments'));
+    expect(storedComment).toEqual(testComment);
   })
 
-}) */
+
+})
+
 
 describe('Personas', () => {
 

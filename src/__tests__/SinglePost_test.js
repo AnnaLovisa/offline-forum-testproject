@@ -11,20 +11,23 @@ beforeEach(() => {
 describe('<SinglePost />', () => {
 
   it('delete button should show up if author is the same as currentPersona', () => {
-    const component = mount(<SinglePost title="enTitel" content="liteContent" id="123" author="anna" currentPersona="anna" date="2018-01-31" onClick={jest.fn()} />)
-    expect(component.find('Button').length).toEqual(1)
+    const wrapper = mount(<SinglePost title="enTitel" content="liteContent" id="123" author="anna" currentPersona="anna" date="2018-01-31" onClick={jest.fn()} />)
+    expect(wrapper.find('Button').length).toEqual(1)
   })
     
   it('delete button should not show up if author is not the same as currentPersona', () => {
-    const component = mount(<SinglePost title="enTitel" content="liteContent" id="123" author="maja" currentPersona="anna" date="2018-01-31" onClick={jest.fn()} />)
-    expect(component.find('Button').length).toEqual(0)
+    const wrapper = mount(<SinglePost title="enTitel" content="liteContent" id="123" author="maja" currentPersona="anna" date="2018-01-31" onClick={jest.fn()} />)
+    expect(wrapper.find('Button').length).toEqual(0)
   })
     
   it('should call the onClick-function in button', () => {
     const fakeClick = jest.fn();
-    const component = mount(<SinglePost title="enTitel" content="liteContent" id="123" author="anna" currentPersona="anna" date="2018-01-31" onClick={fakeClick} />)
+    const wrapper = shallow(<SinglePost title="enTitel" content="liteContent" id="123" author="anna" currentPersona="anna" date="2018-01-31" onClick={fakeClick} />)
     expect(fakeClick).toHaveBeenCalledTimes(0);
-    component.find('Button').simulate('click');
-    expect(fakeClick).toHaveBeenCalledTimes(1);
+    wrapper.find('Button').simulate('click');
+    /* expect(fakeClick).toHaveBeenCalledTimes(1); */
+    expect(fakeClick).toHaveBeenCalledWith("123");
   })
+
 })
+

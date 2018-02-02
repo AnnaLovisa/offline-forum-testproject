@@ -23,4 +23,5 @@ describe('</SingleComment />', () => {
     component.find('Button').simulate('click');
     expect(fakeClick).toHaveBeenCalledTimes(1);
   })
+  
 })

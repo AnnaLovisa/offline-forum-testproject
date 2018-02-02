@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, mount, shallow } from 'enzyme';
-import Comment from '../components/Comments';
+import Comments from '../components/Comments';
 import CreateNewComment from '../components/CreateNewComment';
 import * as api from '../api/index';
 
 describe('<CreateNewComment />', () => {
-
-
 
   it('the submitbutton should be called', () => {
     const fakeFunction = jest.fn();
@@ -25,8 +23,22 @@ describe('<CreateNewComment />', () => {
     component.find('textarea[name="comment"]').simulate('change', comment);
     expect(component.state().comment).toEqual("annas comment");
 
+    component.find('form').simulate('submit', jest.fn());
+    expect(component.state().comment).toBe("");
   })
 
-  
+  it('should create comments that belong to a specific post', () => {
+    const fakeFunction = jest.fn();
+    const component = mount(<CreateNewComment postId="" author="" updateComments={fakeFunction}  />)
+    const textComment = "hejhej"
+
+    const comment = {target: {name: "comment", value: textComment}}
+    component.find('textarea[name="comment"]').simulate('change', comment);
+    component.find('form').simulate('submit');
+    expect(component.state().comment).toBe("");
+
+  })
+
+  it('should store ')
 
 });

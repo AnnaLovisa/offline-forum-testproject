@@ -28,7 +28,7 @@ describe('<CreateNewPost />', () => {
   })
 
 
-  it('should set the inputvalues in state onchange', () => {
+  it('should set the inputvalues in state onchange and empty them after submit', () => {
     const component = mount(<CreateNewPost author="anna" updatePosts={jest.fn()} onChange={jest.fn()} />);
 
     const title = {target: {name: "title", value: fakePost.title}}
@@ -39,6 +39,9 @@ describe('<CreateNewPost />', () => {
     component.find('textarea[name="content"]').simulate('change', content);
     expect(component.state().content).toEqual("annas content");
 
+    component.find('form').simulate('submit', jest.fn());
+    expect(component.state().title).toBe("");
+    expect(component.state().content).toBe("");
   })
 
 
