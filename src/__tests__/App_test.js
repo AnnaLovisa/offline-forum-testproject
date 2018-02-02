@@ -30,12 +30,14 @@ describe('<App />', () => {
     expect(wrapper.state().currentPersona).toBe("anna");
    })
 
-   it('should call the method changePage', () => {
-    const wrapper = mount(<App currentPage="home" />)
+  it('changePage should toggle to bot', () => {
+    const wrapper = mount(<App currentPage="bot" />)
+    wrapper.setState({ currentPage: "home" });
     wrapper.instance().changePage();
     expect(wrapper.state().currentPage).toBe("bot");
+    wrapper.instance().changePage();
+    expect(wrapper.state().currentPage).toBe("home");
    })
-
 })
 
 

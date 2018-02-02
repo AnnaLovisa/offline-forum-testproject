@@ -1,10 +1,6 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
 import fakePosts from '../fakePosts';
 import * as api from '../api/index';
-/* import App from '../components/App';
-import Posts from '../components/Posts';
-import Comments from '../components/Comments'; */
 
 
 beforeEach(() => {
