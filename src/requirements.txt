@@ -1,0 +1,37 @@
+Testable requirements for the offline forum
+
+  * The app should be able to generate a unique ID containing 9 characters for each user
+
+  * A user should be able to create a new post
+    * What is typed in the title-input should appear as a published title
+    * What is typed in the content-input should appear as a published content
+    * The post should be published when clicking on the Create button
+    * The post should not be published if nothing is typed in the title and the content input-fields
+    * All characters should be able to be used in both fields
+    * Each post should be published together with the right name of the author
+    * Each post should be published together with the right time and date of the publishment
+  
+  * A user should be able to delete its own post
+    * When a user has published a new post, a delete-button should appear next to the post
+    * The post should be deleted when clicking on the delete-button
+
+  * A user should be able to comment on all posts
+    * What is typed in the comment-input should appear as a published comment
+    * The post should be published when clicking on the Comment button
+    * The post should not be published if nothing is typed in the comment inputfield
+    * Each post should be published together with the right name of the author
+    * Each post should be published together with the right time and date of the publishment
+
+  * A user should be able to switch between the authors
+    * The switch should be trigged by the menu-bar
+    * The user/author who is switched should be able to create new posts, comment on posts and write a message
+
+  * A user should be able to talk to a real human
+    * The page for talking to a real human should be rendered when clicking on the Talk to a real human button
+    * What is typed in the inputfield should appear as a message in the chatfield
+    * The message should be sent in the chatfield when clicking on the Skicka-button
+    * An answer from the real human should appear a short while after the message has been sent
+    * A loader should appear during the loadingtime
+
+  * A user should be able to return to the forum when clicking on the button
+    * The button should toggle between the Talk to a real human button and Return to Forum button
