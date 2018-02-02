@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import App from '../components/App';
 import Button from '../components/Button';
 
@@ -16,18 +16,18 @@ describe('<Button />', () => {
   })
 
   it('should update the page on button click to the bot-page', () => {
-    const component = mount(<App />);
-    const button = component.find('button');
+    const wrapper = mount(<App />);
+    const button = wrapper.find('button');
     button.simulate('click');
-    expect(component.state().currentPage).toEqual("bot");
+    expect(wrapper.state().currentPage).toEqual("bot");
   })
 
   it('should update the page on button click to the home-page', () => {
-    const component = mount(<App />);
-    const button = component.find('button');
+    const wrapper = mount(<App />);
+    const button = wrapper.find('button');
     button.simulate('click');
     button.simulate('click');
-    expect(component.state().currentPage).toEqual("home");
+    expect(wrapper.state().currentPage).toEqual("home");
   })
 
 

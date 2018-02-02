@@ -1,10 +1,6 @@
 import React from 'react';
 import { render, mount, shallow } from 'enzyme';
 import App from '../components/App';
-import Button from '../components/Button';
-import * as api from '../api/index';
-import CreateNewPost from '../components/CreateNewPost';
-import Posts from '../components/Posts';
 
 //Shallow renders a component and shows the object-structure with the props and state
 //Mount is used for interactive with the DOM

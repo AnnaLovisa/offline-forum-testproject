@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import fakePosts from '../fakePosts'
 import Posts from '../components/Posts';
-import CreateNewPost from '../components/CreateNewPost';
 import * as api from '../api/index';
 
 

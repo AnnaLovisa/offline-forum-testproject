@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Comments from '../components/Comments';
 import * as api from '../api/index';
 
@@ -35,9 +35,9 @@ describe('<Comments />', () => {
   });
 
   it('should set the stored comments in state', () => {
-    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
-    component.setState({ comments: fakeComment })
-    expect(component.state().comments).toBe(fakeComment)
+    const wrapper = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
+    wrapper.setState({ comments: fakeComment })
+    expect(wrapper.state().comments).toBe(fakeComment)
   })
 
   it('should return all comments that are stored in localStorage', () => {
@@ -47,11 +47,11 @@ describe('<Comments />', () => {
 
   it('should remove comment', () => {
     localStorage.setItem('comments', JSON.stringify(fakeComment));
-    const component = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
-    component.instance().setCommentsFromLocalStorage();
-    expect(component.state().comments).not.toEqual([]);
-    component.instance().removeComment("18");
-    expect(component.state().comments).toEqual([]);
+    const wrapper = mount(<Comments currentPersona="anna" postId="45sfdf56" author="Morgana" date="2018-09-20" comment />)
+    wrapper.instance().setCommentsFromLocalStorage();
+    expect(wrapper.state().comments).not.toEqual([]);
+    wrapper.instance().removeComment("18");
+    expect(wrapper.state().comments).toEqual([]);
   })
 
 })

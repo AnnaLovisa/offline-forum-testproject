@@ -1,8 +1,6 @@
 import React from 'react';
 import { render, mount, shallow } from 'enzyme';
-import Posts from '../components/Posts';
 import SinglePost from '../components/SinglePost';
-import * as api from '../api/index';
 
 beforeEach(() => {
   jest.resetModules();
@@ -25,7 +23,6 @@ describe('<SinglePost />', () => {
     const wrapper = shallow(<SinglePost title="enTitel" content="liteContent" id="123" author="anna" currentPersona="anna" date="2018-01-31" onClick={fakeClick} />)
     expect(fakeClick).toHaveBeenCalledTimes(0);
     wrapper.find('Button').simulate('click');
-    /* expect(fakeClick).toHaveBeenCalledTimes(1); */
     expect(fakeClick).toHaveBeenCalledWith("123");
   })
 

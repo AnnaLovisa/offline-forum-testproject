@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import AvatarSelector from '../components/AvatarSelector';
-import * as api from '../api/index';
 
 describe('<AvatarSelector />', () => {
 
