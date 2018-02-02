@@ -25,15 +25,6 @@ describe('<Posts />', () => {
     }
   ];
 
-  /* const testPost = [
-    {
-      id: "10",
-      title: "Titel by frej",
-      content: "Content by frej",
-      author: "frej",
-      date: "2018-01-29"
-    }
-  ] */
 
   beforeEach(() => {
     localStorage.clear();
@@ -76,13 +67,6 @@ describe('<Posts />', () => {
     expect(wrapper.state().posts).toHaveLength(1);
   })
 
-  /* it('should render a certain post', () => {
-    const wrapper = mount(<Posts postId='565ddy34' currentPersona="Esmeralda" author="Esmeralda" />)
-    wrapper.setState({posts: testPost});
-    wrapper.instance().renderPostList(testPost);
-    expect(wrapper.find('SinglePost').html()).toContain("Titel by frej");
-  })
- */
 })
 
 
